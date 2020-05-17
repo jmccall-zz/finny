@@ -25,12 +25,12 @@ app = Flask(__name__)
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
 
-@app.route('/<path>')
+@app.route('/')
 def yeet():
     """Do the stuffzz"""
     print(app.config['IEX_API_KEY'])
     print(app.config['IEX_HOSTNAME'])
-    return path
+    return "path"
 
 
 if __name__ == '__main__':
