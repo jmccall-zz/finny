@@ -23,7 +23,7 @@ from flask import Flask
 app = Flask(__name__)
 
 # Load app configuration
-app.config.from_envvar('APPLICATION_SETTINGS')
+app.config.from_pyfile('settings.cfg')
 
 @app.route('/<path:path>')
 def yeet():
