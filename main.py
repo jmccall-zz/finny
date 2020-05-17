@@ -14,6 +14,7 @@
 
 # [START gae_python37_app]
 import requests
+import urllib.parse
 
 from flask import Flask
 
@@ -29,12 +30,26 @@ app.config.from_pyfile('settings.cfg')
 @app.route('/iex/<path:path>', methods=['GET', 'POST'])
 def iex(path):
     """Reverse proxy for IEX Cloud API"""
-    msg = '{}\n{}\n{}\n'.format(
-        app.config['IEX_API_KEY'],
+    # Build parts of request url
+    parts = (
+        'https',
         app.config['IEX_HOSTNAME'],
-        path)
-    return msg
+        path,
+        '',
+        'key='.format(app.config['IEX_API_KEY']),
+        ''
+    )
 
+    # Build url
+    url = urllib.parse.urlunparse(parts).geturl()
+
+    # Make the request
+    app.logger.debug('Making request to IEX Cloud service: %s', url)
+    r = requests.get(url)
+    app.logger.debug('Response status_code: %d', r.status_code)
+    app.logger.debug('Response text: %s', r.text)
+
+    return r.text
 
 @app.route('/')
 def yeet():
