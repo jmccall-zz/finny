@@ -25,7 +25,7 @@ app = Flask(__name__)
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
 
-@app.route('/<path:path>')
+@app.route('/path')
 def yeet():
     """Do the stuffzz"""
     print(app.config['IEX_API_KEY'])
