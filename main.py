@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # [START gae_python37_app]
+import reqeusts
+
 from flask import Flask
 
 
@@ -20,11 +22,16 @@ from flask import Flask
 # called `app` in `main.py`.
 app = Flask(__name__)
 
+# Load app configuration
+app.config.from_object('yourapplication.default_settings')
+app.config.from_envvar('YOURAPPLICATION_SETTINGS')
 
-@app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+@app.route('/<path:path>')
+def yeet():
+    """Do the stuffzz"""
+    print(app.config['IEX_API_KEY'])
+    print(app.config['IEX_HOSTNAME'])
+    return path
 
 
 if __name__ == '__main__':
