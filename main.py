@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-import reqeusts
+import requests
 
 from flask import Flask
 
