@@ -25,6 +25,17 @@ app = Flask(__name__)
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
 
+@app.route('/iex/', defaults={'path': 'path'})
+@app.route('/iex/<path:path>', methods=['GET', 'POST'])
+def iex(id):
+    """Reverse proxy for IEX Cloud API"""
+    msg = '{}\n{}\n{}\n'.format(
+        app.config['IEX_API_KEY'],
+        app.config['IEX_HOSTNAME'],
+        path)
+    return msg
+
+
 @app.route('/')
 def yeet():
     """Do the stuffzz"""
