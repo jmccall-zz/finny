@@ -31,25 +31,30 @@ app.config.from_pyfile('settings.cfg')
 def iex(path):
     """Reverse proxy for IEX Cloud API"""
     # Build parts of request url
-    parts = (
-        'https',
-        app.config['IEX_HOSTNAME'],
-        path,
-        '',
-        'key='.format(app.config['IEX_API_KEY']),
-        ''
+    url_parts = (
+        'https',                        # Scheme
+        app.config['IEX_HOSTNAME'],     # Network location
+        path,                           # Path
+        '',                             # Params
+        'token={}'.format(              # Query args
+            app.config['IEX_API_KEY']),
+        ''                              # Fragment id
     )
 
     # Build url
-    url = urllib.parse.urlunparse(parts).geturl()
+    url = urllib.parse.urlunparse(url_parts)
+    print(url)
 
     # Make the request
     app.logger.debug('Making request to IEX Cloud service: %s', url)
     r = requests.get(url)
     app.logger.debug('Response status_code: %d', r.status_code)
-    app.logger.debug('Response text: %s', r.text)
 
-    return r.text
+    # Raise for 4xx or 5xx
+    r.raise_for_status()
+
+    # Return json response
+    return r.json()
 
 @app.route('/')
 def yeet():
