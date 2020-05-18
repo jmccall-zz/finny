@@ -13,15 +13,23 @@
 # limitations under the License.
 
 # [START gae_python37_app]
+# import logging
 import requests
 import urllib.parse
 
 from flask import Flask
+import utils.dividends as dividends
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
-app = Flask(__name__)
+app = Flask('finny')
+
+# Init app.logger which adds default handlers
+# for handler in app.logger.handlers:
+#     logging.root.addHandler(handler)
+
+# app.logger.debug('Finny server starting ...')
 
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
@@ -56,12 +64,18 @@ def iex(path):
     # Return json response
     return r.json()
 
-@app.route('/')
-def yeet():
+
+@app.route('/div/<symbol>')
+def yeet(symbol):
     """Do the stuffzz"""
-    print(app.config['IEX_API_KEY'])
-    print(app.config['IEX_HOSTNAME'])
-    return "path"
+    app.logger.debug('do yeet')
+    # import pdb; pdb.set_trace()
+    r = dividends.get_div_years_of_growth(symbol)
+
+    # import pdb; pdb.set_trace()
+    # app.logger.debug('Done with yeet')
+
+    return symbol
 
 
 if __name__ == '__main__':
