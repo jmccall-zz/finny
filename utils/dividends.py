@@ -37,7 +37,7 @@ def get_div_years_of_growth(symbol):
         percent_change = 0
         if len(parts) == 4:
             match = re.match(r'-?\d+\.\d{2}', parts[3])
-            percent_change = match.group(0) if match, else 0
+            percent_change = match.group(0) if match else 0
 
         # import pdb; pdb.set_trace()
         logger.debug('Data: %s', parts)

@@ -34,6 +34,11 @@ app = Flask('finny')
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
 
+@app.route('/')
+def hello():
+    """Say hello!"""
+    return "tranquiloooo"
+
 @app.route('/iex/', defaults={'path': 'path'})
 @app.route('/iex/<path:path>', methods=['GET', 'POST'])
 def iex(path):
