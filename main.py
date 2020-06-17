@@ -19,7 +19,7 @@ import requests
 import urllib.parse
 
 from flask import Flask, url_for, send_from_directory
-import utils.dividends as dividends
+import dividends
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app

@@ -16,20 +16,21 @@
 
 `$ sudo apt install python3-venv`
 
+**Clone app [repository](https://github.com/jmccall/finny)**
+```
+cd $PROJECT_DIR
+$ git clone git@github.com:jmccall/finny.git
+```
+
 **Create python3 virtual env**
 ```
-$ cd ~/Projects
-$ python3 -m venv finny
-$ cd ~/Projects/finny
+$ cd $PROJECT_DIR/finny
+$ python3 -m venv venv
 ```
-
-**Clone app [repository](https://github.com/jmccall/finny)**
-
-`$ git clone git@github.com:jmccall/finny.git`
 
 **Activate venv**
 
-`$ source ~/Projects/finny/bin/activate`
+`$ source venv/bin/activate`
 
 **Install dependencies**
 
