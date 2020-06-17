@@ -23,13 +23,13 @@ $ python3 -m venv finny
 $ cd ~/Projects/finny
 ```
 
-**Clone app repository**
+**Clone app [repository](https://github.com/jmccall/finny)**
 
 `$ git clone git@github.com:jmccall/finny.git`
 
 **Activate venv**
 
-`$ source ~Projects/finny/bin/activate`
+`$ source ~/Projects/finny/bin/activate`
 
 **Install dependencies**
 

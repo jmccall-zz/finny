@@ -14,10 +14,11 @@
 
 # [START gae_python37_app]
 # import logging
+import os
 import requests
 import urllib.parse
 
-from flask import Flask
+from flask import Flask, url_for, send_from_directory
 import utils.dividends as dividends
 
 
@@ -34,6 +35,13 @@ app = Flask('finny')
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
 
+# Favicon
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+# Say hello at root
 @app.route('/')
 def hello():
     """Say hello!"""
