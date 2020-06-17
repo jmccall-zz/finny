@@ -45,3 +45,5 @@ $ python3 -m venv venv
 [Quota API Google Doc](https://docs.google.com/document/d/1IlJgXWBHKrOYyDIayTwMn5FuKJ-GmBmTbT9VWNu2IS8/edit#heading=h.yoy3dee73fiw)
 
 *   Contact `jmccall707@gmail.com` for access
+
+[IEX Proxy Logic (Lucid charts)](https://app.lucidchart.com/documents/view/b999b045-3b5b-4d9d-9e16-2d1524a5bbdb/0_0)
