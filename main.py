@@ -18,11 +18,11 @@ import os
 import requests
 import urllib.parse
 
-from flask import Flask, url_for, send_from_directory
+from flask import Flask, request, send_from_directory, url_for
 
 # Project imports
 import dividends
-import iex
+from iex import do_iex
 
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
@@ -54,32 +54,7 @@ def hello():
 @app.route('/iex/<path:path>', methods=['GET', 'POST'])
 def iex(path):
     """Reverse proxy for IEX Cloud API"""
-    # Build parts of request url
-    url_parts = (
-        'https',                        # Scheme
-        app.config['IEX_HOSTNAME'],     # Network location
-        path,                           # Path
-        '',                             # Params
-        'token={}'.format(              # Query args
-            app.config['IEX_API_KEY']),
-        ''                              # Fragment id
-    )
-
-    # Build url
-    url = urllib.parse.urlunparse(url_parts)
-    print(url)
-
-    # Make the request
-    app.logger.debug('Making request to IEX Cloud service: %s', url)
-    r = requests.get(url)
-    app.logger.debug('Response status_code: %d', r.status_code)
-
-    # Raise for 4xx or 5xx
-    r.raise_for_status()
-
-    # Return json response
-    return r.json()
-
+    return do_iex(path, request.args)
 
 @app.route('/div/<symbol>')
 def yeet(symbol):

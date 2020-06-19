@@ -1,3 +1,10 @@
+# Infra set up
+
+**GCP App Engine**
+This service runs as a Python3 [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+app on [GCP App Engine](https://cloud.google.com/appengine/docs/standard/python3).
+
+
 # Environment setup
 
 **Download atom from the [website](https://atom.io)**
