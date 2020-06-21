@@ -12,6 +12,10 @@ config = {
         'dividends/ytd': {
             'freshness': '60d',
         },
+        # /stable/stock/{symbol}/quote/companyName
+        'quote/companyName': {
+            'freshness': '52w',
+        },
         # /stable/stock/{symbol}/quote/latestPrice
         'quote/latestPrice': {
             'freshness': '24h',
