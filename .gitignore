@@ -1,3 +1,4 @@
+/creds
 /venv
 
 *.pyc
@@ -10,3 +11,5 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+.gcloudignore
