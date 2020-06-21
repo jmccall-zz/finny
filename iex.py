@@ -226,7 +226,7 @@ def prep_response(data):
     """Given a document dict, prep it to be returned to user"""
     # Convert to string if data is single int or float
     if isinstance(data, int) or isinstance(data, float):
-        return str(data)
+        return '\"' + str(data) + '\"'
 
     # Extra checks for dict type data
     elif isinstance(data, dict):
@@ -236,7 +236,7 @@ def prep_response(data):
         # return back to end users we only return the value, just like they'd
         # expect if hitting IEX directly
         if len(data.keys()) == 1 and current_app.config['FIRESTORE_VALUE_KEY'] in data:
-            return str(data[current_app.config['FIRESTORE_VALUE_KEY']])
+            return '\"' + str(data[current_app.config['FIRESTORE_VALUE_KEY']]) + '\"'
 
     return data
 
