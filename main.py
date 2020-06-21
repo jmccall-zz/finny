@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-# import logging
 import os
 import requests
 import urllib.parse
@@ -21,22 +20,17 @@ import urllib.parse
 from flask import Flask, request, send_from_directory, url_for
 
 # Project imports
-import dividends
-from iex import do_iex
-
+import iex
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
 app = Flask('finny')
 
-# Init app.logger which adds default handlers
-# for handler in app.logger.handlers:
-#     logging.root.addHandler(handler)
-
-# app.logger.debug('Finny server starting ...')
-
 # Load app configuration
 app.config.from_pyfile('settings.cfg')
+
+# Register
+app.register_blueprint(iex.bp)
 
 # Favicon
 @app.route('/favicon.ico')
@@ -49,25 +43,7 @@ def favicon():
 def hello():
     """Say hello!"""
     return "tranquiloooo"
-
-@app.route('/iex/', defaults={'path': 'path'})
-@app.route('/iex/<path:path>', methods=['GET', 'POST'])
-def iex(path):
-    """Reverse proxy for IEX Cloud API"""
-    return do_iex(path, request.args)
-
-@app.route('/div/<symbol>')
-def yeet(symbol):
-    """Do the stuffzz"""
-    app.logger.debug('do yeet')
-    # import pdb; pdb.set_trace()
-    r = dividends.get_div_years_of_growth(symbol)
-
-    # import pdb; pdb.set_trace()
-    # app.logger.debug('Done with yeet')
-
-    return symbol
-
+    
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App

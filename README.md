@@ -1,51 +1,53 @@
 # Infra set up
 
-**GCP App Engine**
+## GCP App Engine
+
 This service runs as a Python3 [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 app on [GCP App Engine](https://cloud.google.com/appengine/docs/standard/python3).
 
 
 # Environment setup
 
-**Download atom from the [website](https://atom.io)**
+## Setup atom ([website for download])(https://atom.io)
 
 `$ sudo apt install ./Downloads/atom-amd64.deb`
 
-**[Install Cloud SDK](https://cloud.google.com/sdk/docs/downloads-apt-get)**
+## [Install Cloud SDK](https://cloud.google.com/sdk/docs/downloads-apt-get)
 
-**Init Cloud SDK profile**
-
-`$ gcloud init`
-
-**[Configure SSH for Github](https://help.github.com/en/enterprise/2.17/user/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)**
-
-**Install python3 venv**
-
-`$ sudo apt install python3-venv`
-
-**Clone app [repository](https://github.com/jmccall/finny)**
 ```
-cd $PROJECT_DIR
-$ git clone git@github.com:jmccall/finny.git
+# Init gcloud
+$ gcloud init
+
+# Install datastore emulator
+$ sudo apt install google-cloud-sdk-datastore-emulator
 ```
 
-**Create python3 virtual env**
-```
-$ cd $PROJECT_DIR/finny
-$ python3 -m venv venv
-```
+## [Configure SSH for Github](https://help.github.com/en/enterprise/2.17/user/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)**
 
-**Activate venv**
+## Dev env setup
 
-`$ source venv/bin/activate`
+1.  `$ sudo apt install python3-venv`
 
-**Install dependencies**
+2.  **Clone app [repository](https://github.com/jmccall/finny)**
+    ```
+    cd $PROJECT_DIR
+    $ git clone git@github.com:jmccall/finny.git
+    ```
 
-`(vnenv)$ pip install -r requirements.txt`
+3.  Create python3 virtual env**
+    ```
+    $ cd $PROJECT_DIR/finny
+    $ python3 -m venv venv
+    ```
 
-**Run app locally**
+4.  Activate venv**
+    `$ source venv/bin/activate`
 
-`(venv)$ python main.py`
+5.  Install dependencies**
+    `$(vnenv) pip install -r requirements.txt`
+
+6.  Run app locally**
+    `$(venv)$ python main.py`
 
 # Documentation
 
@@ -54,3 +56,20 @@ $ python3 -m venv venv
 *   Contact `jmccall707@gmail.com` for access
 
 [IEX Proxy Logic (Lucid charts)](https://app.lucidchart.com/documents/view/b999b045-3b5b-4d9d-9e16-2d1524a5bbdb/0_0)
+
+## Services
+
+### IEX
+
+Forward proxy to [IEX Cloud API](https://iexcloud.io/docs/api/).
+
+Usage: https://finyee.wl.r.appspot.com/iex/stable/stock/{symbol}/latestPrice
+
+## Test locally
+```
+# Set app default creds so you can connect to firestore
+$ export GOOGLE_APPLICATION_CREDENTIALS=<service account key path>
+
+# Run it
+$(venv) python main.py
+```
