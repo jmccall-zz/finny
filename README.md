@@ -5,10 +5,17 @@
 This service runs as a Python3 [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 app on [GCP App Engine](https://cloud.google.com/appengine/docs/standard/python3).
 
+## [Firestore](https://cloud.google.com/appengine/docs/standard/python3/using-cloud-datastore)
+
+Firestore DB runs in the same GCP project and is used to store fin info. The
+IEX views are configured with "freshness" configs so instead of hitting the
+IEX Cloud endpoint every time and blowing through usage quota, we just go to
+Firestore.
+
 
 # Environment setup
 
-## Setup atom ([website for download])(https://atom.io)
+## Setup atom ([website for download](https://atom.io))
 
 `$ sudo apt install ./Downloads/atom-amd64.deb`
 
@@ -22,7 +29,7 @@ $ gcloud init
 $ sudo apt install google-cloud-sdk-datastore-emulator
 ```
 
-## [Configure SSH for Github](https://help.github.com/en/enterprise/2.17/user/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)**
+## [Configure SSH for Github](https://help.github.com/en/enterprise/2.17/user/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 ## Dev env setup
 
