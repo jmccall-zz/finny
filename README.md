@@ -72,7 +72,7 @@ Forward proxy to [IEX Cloud API](https://iexcloud.io/docs/api/).
 
 Usage: https://finyee.wl.r.appspot.com/iex/stable/stock/{symbol}/latestPrice
 
-## Test locally
+# Test
 ```
 # Set app default creds so you can connect to firestore
 $ export GOOGLE_APPLICATION_CREDENTIALS=<service account key path>
@@ -80,3 +80,12 @@ $ export GOOGLE_APPLICATION_CREDENTIALS=<service account key path>
 # Run it
 $(venv) python main.py
 ```
+
+## Deploy to GAE
+```
+$ cd $PROJECT_DIR
+$ gcloud app deploy
+```
+
+# Example usage
+https://finyee.wl.r.appspot.com/iex/stable/stock/T/quote/latestPrice?&token=IEX_TOKEN
