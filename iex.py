@@ -3,6 +3,7 @@ Hacky IEX forward proxy stuff
 """
 import configparser
 import datetime
+import json
 import logging
 import re
 import requests
@@ -224,9 +225,11 @@ def path_to_document_id(path):
 
 def prep_response(data):
     """Given a document dict, prep it to be returned to user"""
+    # Get JSONEncoder
+    encoder = json.JSONEncoder()
     # Convert to string if data is single int or float
     if isinstance(data, int) or isinstance(data, float):
-        return '\"' + str(data) + '\"'
+        return encoder.encode(str(data))
 
     # Extra checks for dict type data
     elif isinstance(data, dict):
@@ -236,9 +239,9 @@ def prep_response(data):
         # return back to end users we only return the value, just like they'd
         # expect if hitting IEX directly
         if len(data.keys()) == 1 and current_app.config['FIRESTORE_VALUE_KEY'] in data:
-            return '\"' + str(data[current_app.config['FIRESTORE_VALUE_KEY']]) + '\"'
+            return encoder.encode(str(data[current_app.config['FIRESTORE_VALUE_KEY']]))
 
-    return data
+    return encoder.encode(data)
 
 def set_firestore_doc(id, data):
     """Create firestore document"""
